@@ -1,36 +1,38 @@
 package com.example.rohitdutt.e_comm.data.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
 @Table(name="products")
-public class Product {
+public class Product implements Serializable {
 
     @Id
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "product_id")
     private String productId;
 
-    @Column(name = "item_name", nullable = false)
+    @Column(name = "item_name")
     private String itemName;
 
-    @Column(name = "barcode", nullable = false)
+    @Column(name = "barcode")
     private String barcode;
 
-    @Column(name = "price_per_unit", nullable = false)
+    @Column(name = "price_per_unit")
     private float pricePerUnit;
 
-    @Column(name = "sell_price", nullable = false)
+    @Column(name = "sell_price")
     private float sellPrice;
 
-    @Column(name = "profit_per_unit", nullable = false)
+    @Column(name = "profit_per_unit")
     private float profitPerUnit;
 
-    @Column(name = "available_unit", nullable = false)
+    @Column(name = "available_unit")
     private int availableUnit;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id")
     private List<Review> reviews;
 
     public Product() {
@@ -54,6 +56,10 @@ public class Product {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public String getItemName() {

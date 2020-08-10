@@ -1,53 +1,56 @@
 package com.example.rohitdutt.e_comm.data.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
 @Entity
 @Table(name="order_summary")
-public class OrderSummary{
+public class OrderSummary implements Serializable {
 
     @Id
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "order_id")
     private String orderId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Customer customer;
-
-    @Column(name = "order_date", nullable = false)
+    @Column(name = "order_date")
     private Date orderDate;
 
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private float amount;
 
-    @Column(name = "actual_amount", nullable = false)         //Newly added
+    @Column(name = "actual_amount")
     private float actualAmount;
 
-    @Column(name = "profit_amount", nullable = false)         //Newly added
+    @Column(name = "profit_amount")
     private float profitAmount;
 
-    @Column(name = "shipping_address", nullable = false)
+    @Column(name = "shipping_address")
     private String shippingAddress;
 
-    @Column(name = "contact_number", nullable = false)
+    @Column(name = "contact_number")
     private String contactNumber;
 
-    @Column(name = "order_status", nullable = false)
+    @Column(name = "order_status")
     private String orderStatus;
 
-    @Column(name = "pincode", nullable = false)
+    @Column(name = "pincode")
     private String pincode;
 
-    @Column(name = "payment_mode", nullable = false)
+    @Column(name = "payment_mode")
     private String paymentMode;
 
-    @Column(name = "payment_status", nullable = false)
+    @Column(name = "payment_status")
     private String paymentStatus;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "transaction_id")
     private List<OrderDetails> orderDetails;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public OrderSummary() {
         super();

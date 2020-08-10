@@ -1,13 +1,14 @@
 package com.example.rohitdutt.e_comm.data.entity;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="customer")
-public class Customer{
+public class Customer implements Serializable {
     @Id
     @Column(name = "customer_id")
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
     private String customerId;
 
     @Column(name = "name")
@@ -34,15 +35,16 @@ public class Customer{
     @Column(name = "date")
     private Date date;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<OrderSummary> orderSummaries;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
+    private List<OrderSummary> orderSummaries;
 
 
     public Customer() {
         super();
     }
 
-    public Customer(String customerId, String name, String email, String mobileNo, String city, String pincode, String country, String shippingAddress, Date date) {
+    public Customer(String customerId, String name, String email, String mobileNo, String city, String pincode, String country, String shippingAddress, Date date, List<OrderSummary> orderSummaries) {
         this.customerId = customerId;
         this.name = name;
         this.email = email;
@@ -52,6 +54,7 @@ public class Customer{
         this.country = country;
         this.shippingAddress = shippingAddress;
         this.date = date;
+        this.orderSummaries = orderSummaries;
     }
 
     public String getShippingAddress() {
@@ -66,7 +69,7 @@ public class Customer{
         return customerId;
     }
 
-    public void setCustomerId(String  customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -134,4 +137,11 @@ public class Customer{
         this.date = date;
     }
 
+    public List<OrderSummary> getOrderSummaries() {
+        return orderSummaries;
+    }
+
+    public void setOrderSummaries(List<OrderSummary> orderSummaries) {
+        this.orderSummaries = orderSummaries;
+    }
 }

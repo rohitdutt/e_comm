@@ -1,14 +1,14 @@
 package com.example.rohitdutt.e_comm.data.entity;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="order_details")
-public class OrderDetails{
+public class OrderDetails implements Serializable {
 
     @Id
     @Column(name = "transaction_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String transactionId;
 
     @Column(name = "order_id")
@@ -27,6 +27,7 @@ public class OrderDetails{
     private Date OrderDate;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     public OrderDetails() {
