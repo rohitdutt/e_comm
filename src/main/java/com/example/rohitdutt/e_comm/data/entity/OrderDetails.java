@@ -5,14 +5,14 @@ import java.util.Date;
 
 @Entity
 @Table(name="order_details")
-public class OrderDetails implements Serializable {
+public class OrderDetails{
 
     @Id
     @Column(name = "transaction_id")
     private String transactionId;
 
-    @Column(name = "order_id")
-    private String orderId;
+//    @Column(name = "order_id")
+//    private String orderId;
 
     @Column(name = "item_name")
     private String itemName;
@@ -24,7 +24,7 @@ public class OrderDetails implements Serializable {
     private int quantity;
 
     @Column(name = "order_date")
-    private Date OrderDate;
+    private Date orderDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
@@ -34,13 +34,15 @@ public class OrderDetails implements Serializable {
         super();
     }
 
-    public OrderDetails(String transactionId, String orderId, String itemName, float amount, int quantity, Date orderDate, Product product) {
+    public OrderDetails(String transactionId,
+//                        String orderId,
+                        String itemName, float amount, int quantity, Date orderDate, Product product) {
         this.transactionId = transactionId;
-        this.orderId = orderId;
+//        this.orderId = orderId;
         this.itemName = itemName;
         this.amount = amount;
         this.quantity = quantity;
-        OrderDate = orderDate;
+        this.orderDate = orderDate;
         this.product = product;
     }
 
@@ -52,13 +54,13 @@ public class OrderDetails implements Serializable {
         this.transactionId = transactionId;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+//    public String getOrderId() {
+//        return orderId;
+//    }
+//
+//    public void setOrderId(String orderId) {
+//        this.orderId = orderId;
+//    }
 
     public String getItemName() {
         return itemName;
@@ -85,11 +87,11 @@ public class OrderDetails implements Serializable {
     }
 
     public Date getOrderDate() {
-        return OrderDate;
+        return orderDate;
     }
 
     public void setOrderDate(Date orderDate) {
-        OrderDate = orderDate;
+        this.orderDate = orderDate;
     }
 
     public Product getProduct() {

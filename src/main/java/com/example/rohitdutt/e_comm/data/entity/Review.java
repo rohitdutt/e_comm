@@ -1,44 +1,53 @@
 package com.example.rohitdutt.e_comm.data.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
 @Table(name="review")
-public class Review implements Serializable {
+public class Review{
 
     @Id
-    @Column(name = "review_id", nullable = false)
+    @Column(name = "review_id")
     private String reviewId;
 
-    @Column(name = "product_id", nullable = false)
-    private String productId;
-
-    @Column(name = "customer_id", nullable = false)
+    @Column(name = "customer_id")
     private String customerId;
 
-    @Column(name = "date_of_review", nullable = false)
+    @Column(name = "date_of_review")
     private Date dateOfReview;
 
-    @Column(name = "review", nullable = false)
+    @Column(name = "review")
     private String review;
 
-    @Column(name = "rating", nullable = false)
+    @Column(name = "rating")
     private int rating;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+
     public Review() {
-        super();
     }
 
-    public Review(String reviewId, String productId, String customerId, Date dateOfReview, String review, int rating) {
+    public Review(String reviewId, String customerId, Date dateOfReview, String review, int rating, Product product) {
         this.reviewId = reviewId;
-        this.productId = productId;
         this.customerId = customerId;
         this.dateOfReview = dateOfReview;
         this.review = review;
         this.rating = rating;
+        this.product=product;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getReviewId() {
@@ -47,14 +56,6 @@ public class Review implements Serializable {
 
     public void setReviewId(String reviewId) {
         this.reviewId = reviewId;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 
     public String getCustomerId() {

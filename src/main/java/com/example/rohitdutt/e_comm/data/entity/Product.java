@@ -1,13 +1,16 @@
 package com.example.rohitdutt.e_comm.data.entity;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
 @Table(name="products")
-public class Product implements Serializable {
+public class Product{
 
     @Id
     @Column(name = "product_id")
@@ -31,15 +34,18 @@ public class Product implements Serializable {
     @Column(name = "available_unit")
     private int availableUnit;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "review_id")
-    private List<Review> reviews;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @NotFound(action = NotFoundAction.IGNORE)
+//    @JoinColumn(name = "review_id")
+//    private List<Review> reviews;
 
     public Product() {
         super();
     }
 
-    public Product(String productId, String itemName, String barcode, float pricePerUnit, float sellPrice, float profitPerUnit, int availableUnit, List<Review> reviews) {
+    public Product(String productId, String itemName, String barcode, float pricePerUnit, float sellPrice, float profitPerUnit, int availableUnit
+           // , List<Review> reviews
+    ) {
         this.productId = productId;
         this.itemName = itemName;
         this.barcode = barcode;
@@ -47,7 +53,7 @@ public class Product implements Serializable {
         this.sellPrice = sellPrice;
         this.profitPerUnit = profitPerUnit;
         this.availableUnit = availableUnit;
-        this.reviews = reviews;
+       // this.reviews = reviews;
     }
 
     public String getProductId() {
@@ -58,9 +64,9 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
+//    public void setReviews(List<Review> reviews) {
+//        this.reviews = reviews;
+//    }
 
     public String getItemName() {
         return itemName;
@@ -94,10 +100,9 @@ public class Product implements Serializable {
         this.availableUnit = availableUnit;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
+//    public List<Review> getReviews() {
+//        return reviews;
+//    }
 
     public float getSellPrice() {
         return sellPrice;
@@ -115,17 +120,5 @@ public class Product implements Serializable {
         this.profitPerUnit = profitPerUnit;
     }
 
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", itemName='" + itemName + '\'' +
-                ", barcode='" + barcode + '\'' +
-                ", pricePerUnit=" + pricePerUnit +
-                ", availableUnit=" + availableUnit +
-                ", reviews=" + reviews +
-                '}';
-    }
 
 }

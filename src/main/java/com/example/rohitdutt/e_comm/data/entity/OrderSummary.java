@@ -1,14 +1,13 @@
 package com.example.rohitdutt.e_comm.data.entity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
 @Entity
 @Table(name="order_summary")
-public class OrderSummary implements Serializable {
+public class OrderSummary {
 
     @Id
     @Column(name = "order_id")
@@ -44,21 +43,21 @@ public class OrderSummary implements Serializable {
     @Column(name = "payment_status")
     private String paymentStatus;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "transaction_id")
     private List<OrderDetails> orderDetails;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    private Customer customer;
+    private Customer customerId;
 
     public OrderSummary() {
         super();
     }
 
-    public OrderSummary(String orderId, Customer customer, Date orderDate, float amount, float actualAmount, float profitAmount, String shippingAddress, String contactNumber, String orderStatus, String pincode, String paymentMode, String paymentStatus, List<OrderDetails> orderDetails) {
+    public OrderSummary(String orderId, Customer customerId, Date orderDate, float amount, float actualAmount, float profitAmount, String shippingAddress, String contactNumber, String orderStatus, String pincode, String paymentMode, String paymentStatus, List<OrderDetails> orderDetails) {
         this.orderId = orderId;
-        this.customer = customer;
+        this.customerId = customerId;
         this.orderDate = orderDate;
         this.amount = amount;
         this.actualAmount = actualAmount;
@@ -144,12 +143,12 @@ public class OrderSummary implements Serializable {
         this.paymentStatus = paymentStatus;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Customer getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
     }
 
     public float getActualAmount() {
