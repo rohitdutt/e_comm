@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name="customer")
-public class Customer implements Serializable {
+public class Customer{
     @Id
     @Column(name = "customer_id")
     private String customerId;
@@ -35,16 +35,18 @@ public class Customer implements Serializable {
     @Column(name = "date")
     private Date date;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id")
-    private List<OrderSummary> orderSummaries;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "order_id")
+//    private List<OrderSummary> orderSummaries;
 
 
     public Customer() {
         super();
     }
 
-    public Customer(String customerId, String name, String email, String mobileNo, String city, String pincode, String country, String shippingAddress, Date date, List<OrderSummary> orderSummaries) {
+    public Customer(String customerId, String name, String email, String mobileNo, String city, String pincode, String country, String shippingAddress, Date date
+//                    List<OrderSummary> orderSummaries
+                    ) {
         this.customerId = customerId;
         this.name = name;
         this.email = email;
@@ -54,7 +56,7 @@ public class Customer implements Serializable {
         this.country = country;
         this.shippingAddress = shippingAddress;
         this.date = date;
-        this.orderSummaries = orderSummaries;
+//        this.orderSummaries = orderSummaries;
     }
 
     public String getShippingAddress() {
@@ -137,11 +139,11 @@ public class Customer implements Serializable {
         this.date = date;
     }
 
-    public List<OrderSummary> getOrderSummaries() {
-        return orderSummaries;
-    }
-
-    public void setOrderSummaries(List<OrderSummary> orderSummaries) {
-        this.orderSummaries = orderSummaries;
-    }
+//    public List<OrderSummary> getOrderSummaries() {
+//        return orderSummaries;
+//    }
+//
+//    public void setOrderSummaries(List<OrderSummary> orderSummaries) {
+//        this.orderSummaries = orderSummaries;
+//    }
 }
