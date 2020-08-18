@@ -43,9 +43,9 @@ public class OrderSummary {
     @Column(name = "payment_status")
     private String paymentStatus;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "transaction_id")
-    private List<OrderDetails> orderDetails;
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "transaction_id")
+//    private List<OrderDetails> orderDetails;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
@@ -55,7 +55,9 @@ public class OrderSummary {
         super();
     }
 
-    public OrderSummary(String orderId, Customer customerId, Date orderDate, float amount, float actualAmount, float profitAmount, String shippingAddress, String contactNumber, String orderStatus, String pincode, String paymentMode, String paymentStatus, List<OrderDetails> orderDetails) {
+    public OrderSummary(String orderId, Customer customerId, Date orderDate, float amount, float actualAmount, float profitAmount, String shippingAddress, String contactNumber, String orderStatus, String pincode, String paymentMode, String paymentStatus
+//                        List<OrderDetails> orderDetails
+                        ) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.orderDate = orderDate;
@@ -68,7 +70,7 @@ public class OrderSummary {
         this.pincode = pincode;
         this.paymentMode = paymentMode;
         this.paymentStatus = paymentStatus;
-        this.orderDetails = orderDetails;
+      //  this.orderDetails = orderDetails;
     }
 
     public String getOrderId() {
@@ -167,11 +169,11 @@ public class OrderSummary {
         this.profitAmount = profitAmount;
     }
 
-    public List<OrderDetails> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(List<OrderDetails> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
+//    public List<OrderDetails> getOrderDetails() {
+//        return orderDetails;
+//    }
+//
+//    public void setOrderDetails(List<OrderDetails> orderDetails) {
+//        this.orderDetails = orderDetails;
+//    }
 }

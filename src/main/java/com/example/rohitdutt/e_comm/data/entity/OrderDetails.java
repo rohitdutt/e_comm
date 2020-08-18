@@ -1,6 +1,5 @@
 package com.example.rohitdutt.e_comm.data.entity;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -11,8 +10,9 @@ public class OrderDetails{
     @Column(name = "transaction_id")
     private String transactionId;
 
-//    @Column(name = "order_id")
-//    private String orderId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private OrderSummary orderId;
 
     @Column(name = "item_name")
     private String itemName;
@@ -34,11 +34,9 @@ public class OrderDetails{
         super();
     }
 
-    public OrderDetails(String transactionId,
-//                        String orderId,
-                        String itemName, float amount, int quantity, Date orderDate, Product product) {
+    public OrderDetails(String transactionId, OrderSummary orderId, String itemName, float amount, int quantity, Date orderDate, Product product) {
         this.transactionId = transactionId;
-//        this.orderId = orderId;
+        this.orderId = orderId;
         this.itemName = itemName;
         this.amount = amount;
         this.quantity = quantity;
@@ -54,13 +52,13 @@ public class OrderDetails{
         this.transactionId = transactionId;
     }
 
-//    public String getOrderId() {
-//        return orderId;
-//    }
-//
-//    public void setOrderId(String orderId) {
-//        this.orderId = orderId;
-//    }
+    public OrderSummary getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(OrderSummary orderId) {
+        this.orderId = orderId;
+    }
 
     public String getItemName() {
         return itemName;
