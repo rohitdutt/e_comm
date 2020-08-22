@@ -1,12 +1,5 @@
 package com.example.rohitdutt.e_comm.data.entity;
-
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Entity
 @Table(name="products")
@@ -119,6 +112,5 @@ public class Product{
     public void setProfitPerUnit(float profitPerUnit) {
         this.profitPerUnit = profitPerUnit;
     }
-
 
 }
