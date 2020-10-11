@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="customer")
@@ -146,4 +147,26 @@ public class Customer{
 //    public void setOrderSummaries(List<OrderSummary> orderSummaries) {
 //        this.orderSummaries = orderSummaries;
 //    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(customerId, customer.customerId) &&
+                Objects.equals(name, customer.name) &&
+                Objects.equals(email, customer.email) &&
+                Objects.equals(mobileNo, customer.mobileNo) &&
+                Objects.equals(city, customer.city) &&
+                Objects.equals(pincode, customer.pincode) &&
+                Objects.equals(country, customer.country) &&
+                Objects.equals(shippingAddress, customer.shippingAddress) &&
+                Objects.equals(date, customer.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerId, name, email, mobileNo, city, pincode, country, shippingAddress, date);
+    }
 }
